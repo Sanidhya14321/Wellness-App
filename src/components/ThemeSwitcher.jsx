@@ -1,13 +1,16 @@
-jsx
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { ThemeContext } from "/vercel/path0/src/contexts/ThemeContext";
+import { useTheme } from "../contexts/ThemeContext"; // ✅ using the custom hook
 
 const ThemeSwitcher = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={toggleTheme}>
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={toggleTheme}
+    >
       Switch to {theme === "light" ? "Dark" : "Light"} Theme
     </motion.button>
   );

@@ -1,5 +1,4 @@
-jsx
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 // Define basic theme palettes
 const themes = {
@@ -29,9 +28,9 @@ const ThemeProvider = ({ children }) => {
   };
 
   const currentTheme = themes[theme];
-  
+
   // Apply theme CSS variables to the document body
-  React.useEffect(() => {
+  useEffect(() => {
     const body = document.body;
     if (body) {
       body.style.setProperty('--background-color', currentTheme.background);
@@ -39,7 +38,7 @@ const ThemeProvider = ({ children }) => {
       body.style.setProperty('--primary-color', currentTheme.primary);
       body.style.setProperty('--secondary-color', currentTheme.secondary);
     }
-  }, [currentTheme]); // Re-run effect when currentTheme changes
+  }, [currentTheme]);
 
   return (
     <ThemeContext.Provider value={{ theme, currentTheme, toggleTheme }}>
@@ -57,4 +56,4 @@ const useTheme = () => {
   return context;
 };
 
-export { ThemeProvider, useTheme };
+export { ThemeProvider, useTheme, ThemeContext };
