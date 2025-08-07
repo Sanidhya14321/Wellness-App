@@ -1,7 +1,7 @@
 jsx
 import React, { useContext } from "react";
-import { ThemeContext } from "../contexts/ThemeContext";
-import { motion } from "framer-motion"; // Import motion for animations
+import ThemeContext from "/vercel/path0/src/contexts/ThemeContext";
+import { motion } from "framer-motion";
 
 const ThemeSwitcher = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
