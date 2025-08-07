@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useTheme } from "../contexts/ThemeContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -19,6 +20,8 @@ const Login = () => {
     setError("");
     console.log("User Logged In:", formData);
   };
+
+  const { theme } = useTheme();
 
   return (
     <motion.div

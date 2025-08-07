@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext"; // Import the theme context
 
 const ArticlePreview = ({ title, excerpt, date, link, image }) => (
   <motion.div
@@ -20,6 +21,8 @@ const ArticlePreview = ({ title, excerpt, date, link, image }) => (
 );
 
 const Articles = () => {
+  const { theme } = useTheme(); // Use the theme context
+
   const articles = [
     {
       title: "Welcome to the New Era of Wellness Travel",
@@ -60,10 +63,10 @@ const Articles = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`} // Apply text color based on theme
     >
       <h1 className="text-4xl font-bold text-center mb-8">Wellness Articles</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> {/* Consider adding Framer Motion stagger to this container */}
         {articles.map((article, index) => (
           <ArticlePreview key={index} {...article} />
         ))}

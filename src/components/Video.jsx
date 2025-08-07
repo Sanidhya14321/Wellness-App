@@ -1,6 +1,7 @@
 import React from "react"
 import { motion } from "framer-motion"
 
+// Component to display a single video with title, description, and an embedded player
 const Video = ({ title, description, videoUrl }) => {
   return (
     <motion.div whileHover={{ scale: 1.05 }} className="bg-white p-6 rounded-lg shadow-md">

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import ThemeSwitcher from '/src/components/ThemeSwitcher.jsx'; import { useTheme } from '/src/contexts/ThemeContext.jsx';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -14,9 +15,11 @@ const Navigation = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
+  const { theme } = useTheme();
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  return (
+  return (<nav className={`shadow-md ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
@@ -32,17 +35,17 @@ const Navigation = () => {
               <motion.div key={item.name} whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
                 <Link
                   to={item.path}
-                  className={`px-3 py-2 rounded-md text-sm font-medium ${
-                    location.pathname === item.path
-                      ? 'text-blue-600 bg-blue-100'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-                  }`}
+                  className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === item.path
+                    ? 'text-blue-600 bg-blue-100'
+                    : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                    }`}
                 >
                   {item.name}
                 </Link>
               </motion.div>
             ))}
           </div>
+          <ThemeSwitcher />
           <div className="md:hidden flex items-center">
             <motion.button
               whileTap={{ scale: 0.95 }}
@@ -76,11 +79,10 @@ const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${
-                    location.pathname === item.path
-                      ? 'text-blue-600 bg-blue-100'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-                  }`}
+                  className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === item.path
+                    ? 'text-blue-600 bg-blue-100'
+                    : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                    }`}
                   onClick={toggleMenu}
                 >
                   {item.name}
@@ -91,6 +93,7 @@ const Navigation = () => {
         )}
       </AnimatePresence>
     </nav>
+  </nav>
   );
 };
 
