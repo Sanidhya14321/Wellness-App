@@ -56,4 +56,5 @@ const useTheme = () => {
   return context;
 };
 
+// ✅ Named exports only — no default
 export { ThemeProvider, useTheme, ThemeContext };
